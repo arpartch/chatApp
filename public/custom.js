@@ -1,17 +1,43 @@
 // global vairables....
 let client, channel, username, activeUser;
 
-client = new StreamChat('<36thr2wa5bn5>');
-```
-> Again, make sure to replace the `<STREAM_APP_KEY>` placeholder with your own key.
-Next, add a function for generating token to the `public/custom.js` file:
-```js
-// [...]
+client = new StreamChat('7dz3bg74gjx2');
+
+const inputElement = document.getElementById("message-input");
+inputElement.addEventListener("keyup", function(event) {
+    if (event.key === "Enter") {
+        sendMessage(inputElement.value)
+        inputElement.value = ""
+    }
+});
 
 async function generateToken(username) {
   const { token } = (await axios.get(`/token?username=${username}`)).data;
   return token;
 }
+
+const user = document.getElementById("user-login-input")
+user.addEventListener("keyup", function(event) {
+    if (event.key === "Enter") {
+        checkAuthState()
+    }
+});
+checkAuthState()
+
+async function checkAuthState() {
+    if (!user.value) {
+        document.getElementById("login-block").style.display = "grid"
+        document.getElementsByClassName("chat-container")[0].style.display = "none";
+    } else {
+        username = user.value
+
+        await initializeClient()
+
+        document.getElementsByClassName("chat-container")[0].style.display = "grid";
+        document.getElementById("login-block").style.display = "none"
+    }
+}
+
 
 async function initializeClient() {
     const token = await generateToken(username);

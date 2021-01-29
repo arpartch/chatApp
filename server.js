@@ -17,7 +17,7 @@ app.listen(8800, () => {
 
 // [...]
 
-const serverClient = new StreamChat('<S36thr2wa5bn5>', '<jym4npntsfk3bujzwe2tpy7fg44vnv9zdwmsa4c4j8nus3633p7mfpc8nmdtd87b>');
+const serverClient = new StreamChat('7dz3bg74gjx2', '4zh77w4jem4b6ryugza4ybuh3as6hw2a9ptyhu7zhvtevdmsv78vxjb7gmn8xg39');
 
 app.get('/token', (req, res) => {
   const { username } = req.query;
